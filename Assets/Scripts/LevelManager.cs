@@ -21,6 +21,13 @@ public class LevelManager : MonoBehaviour
     {
         _level += level;
         _text.text = $"Level: {_level}";
+        if(_level >= Saver.GetInt("goal"))
+        {
+            Saver.SaveInt("mistakes", 5);
+            Saver.SaveString("status", "won");
+            Saver.SaveInt("highscore", Saver.GetInt("highscore") + 1);
+            SceneChanger.LoadScene("EndGame");
+        }
     }
 
     // Start is called before the first frame update

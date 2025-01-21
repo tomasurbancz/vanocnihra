@@ -133,6 +133,13 @@ public class PresentManager : MonoBehaviour
                 if(present._isCoal)
                 {
                     ProgressBarManager.UpdateProgress(-30);
+                    Saver.SaveInt("mistakes", Saver.GetInt("mistakes") - 1);
+                    if(Saver.GetInt("mistakes") < 0)
+                    {
+                        Saver.SaveInt("mistakes", 5);
+                        Saver.SaveString("status", "lost");
+                        SceneChanger.LoadScene("EndGame");
+                    }
                 }
                 else
                 {

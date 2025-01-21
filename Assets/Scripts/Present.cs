@@ -29,7 +29,6 @@ public class Present
 
             Vector2 mousePosition = Input.mousePosition;
             mousePosition = new Vector2(mousePosition.x - screenWidth / 2, mousePosition.y - screenHeight / 2);
-            Debug.Log(mousePosition);
             Vector2 _positionS = new Vector2(_position.x - 30, _position.y - 60);
             if(IsColliding(mousePosition, _positionS, new Vector2(150, 200)))
             {
@@ -41,6 +40,12 @@ public class Present
                 else
                 {
                     ProgressBarManager.UpdateProgress(-30);
+                    if (Saver.GetInt("mistakes") < 0)
+                    {
+                        Saver.SaveInt("mistakes", 5);
+                        Saver.SaveString("status", "lost");
+                        SceneChanger.LoadScene("EndGame");
+                    }
                 }
             }
         }
